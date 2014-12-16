@@ -55,8 +55,6 @@ public class Main extends JavaPlugin implements Listener {
 
 	ICommandHandler ic;
 
-	ArrayList<Integer> whitelist_ids = new ArrayList<Integer>();
-
 	public void onEnable() {
 		m = this;
 		api = MinigamesAPI.getAPI().setupAPI(this, "deathrun", IArena.class, new ArenasConfig(this), new MessagesConfig(this), new IClassesConfig(this), new StatsConfig(this, false), new DefaultConfig(this, false), false);
@@ -99,7 +97,7 @@ public class Main extends JavaPlugin implements Listener {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		ic.handleArgs(this, "mgsplegg", "/" + cmd.getName(), sender, args);
+		ic.handleArgs(this, "mgdeathrun", "/" + cmd.getName(), sender, args);
 		return true;
 	}
 
