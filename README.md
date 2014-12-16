@@ -1,0 +1,4 @@
+MGSplegg
+========
+
+Splegg for MinigamesAPI

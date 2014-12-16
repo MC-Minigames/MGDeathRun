@@ -1,0 +1,12 @@
+name: MGDeathRun
+main: com.comze_instancelabs.deathrun.Main
+version: 1.0.0
+author: InstanceLabs
+softdepend: [Vault, MinigamesLib]
+depend: [MinigamesLib]
+loadbefore: [MinigamesLib]
+commands:
+   dr:
+      description: Main command
+      usage: /dr [action]
+      aliases: [deathrun, mgdeathrun, dr]
