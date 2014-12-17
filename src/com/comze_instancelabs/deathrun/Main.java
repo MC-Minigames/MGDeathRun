@@ -54,6 +54,9 @@ public class Main extends JavaPlugin implements Listener {
 	static Main m = null;
 
 	ICommandHandler ic;
+	
+	int block_lv_to_remove = 1;
+	long ticks = 15;
 
 	public void onEnable() {
 		m = this;
@@ -65,11 +68,16 @@ public class Main extends JavaPlugin implements Listener {
 		ic = new ICommandHandler();
 
 		this.getConfig().addDefault("config.die_below_bedrock_level", false);
+		this.getConfig().addDefault("config.level_of_blocks_to_remove", 1);
+		this.getConfig().addDefault("config.ticks_to_wait_before_breaking_blocks", 15);
 
 		this.getConfig().options().copyDefaults(true);
 		this.saveConfig();
 
 		boolean die_below_zero = this.getConfig().getBoolean("config.die_below_bedrock_level");
+		block_lv_to_remove = this.getConfig().getInt("config.level_of_blocks_to_remove");
+		ticks = this.getConfig().getInt("config.ticks_to_wait_before_breaking_blocks");
+
 		if (die_below_zero) {
 			pli.getArenaListener().loseY = 100;
 		}

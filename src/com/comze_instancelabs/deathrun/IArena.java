@@ -1,23 +1,19 @@
 package com.comze_instancelabs.deathrun;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
-import org.bukkit.util.Vector;
 
 import com.comze_instancelabs.minigamesapi.Arena;
-import com.comze_instancelabs.minigamesapi.ArenaState;
 import com.comze_instancelabs.minigamesapi.ArenaType;
 import com.comze_instancelabs.minigamesapi.MinigamesAPI;
-import com.comze_instancelabs.minigamesapi.util.Util;
 import com.comze_instancelabs.minigamesapi.util.Validator;
 
 public class IArena extends Arena {
@@ -61,23 +57,25 @@ public class IArena extends Arena {
 						// l.setPitch(0F);
 						// Vector dir = l.getDirection().normalize().multiply(0.5D);
 						// p.setVelocity(dir);
-						final Location b1 = l.clone().add(0.3, 0, -0.3);
-						final Location b2 = l.clone().add(-0.3, 0, -0.3);
-						final Location b3 = l.clone().add(0.3, 0, 0.3);
-						final Location b4 = l.clone().add(-0.3, 0, +0.3);
-						a.getSmartReset().addChanged(b1.getBlock());
-						a.getSmartReset().addChanged(b2.getBlock());
-						a.getSmartReset().addChanged(b3.getBlock());
-						a.getSmartReset().addChanged(b4.getBlock());
+						final ArrayList<Location> locs = new ArrayList<Location>(Arrays.asList(l.clone().add(0.3, 0, -0.3), l.clone().add(-0.3, 0, -0.3), l.clone().add(0.3, 0, 0.3), l.clone().add(-0.3, 0, +0.3)));
+						ArrayList<Location> temp = new ArrayList<Location>(locs);
+
+						for (int i = 1; i < m.block_lv_to_remove; i++) {
+							for (Location l_ : temp) {
+								Location n = l_.clone().add(0D, -i, 0D);
+								locs.add(n);
+								a.getSmartReset().addChanged(l_.getBlock());
+								a.getSmartReset().addChanged(n.getBlock());
+							}
+						}
 
 						Bukkit.getScheduler().runTaskLater(m, new Runnable() {
 							public void run() {
-								b1.getBlock().setType(Material.AIR);
-								b2.getBlock().setType(Material.AIR);
-								b3.getBlock().setType(Material.AIR);
-								b4.getBlock().setType(Material.AIR);
+								for (Location l_ : locs) {
+									l_.getBlock().setType(Material.AIR);
+								}
 							}
-						}, 15L);
+						}, m.ticks);
 					}
 				}
 			}
