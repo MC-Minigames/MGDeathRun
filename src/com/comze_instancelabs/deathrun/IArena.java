@@ -54,11 +54,7 @@ public class IArena extends Arena {
 					Player p = Bukkit.getPlayer(p_);
 					if (p != null) {
 						Location l = p.getLocation().add(0D, -1D, 0D);
-						System.out.println(p.getVelocity().getY());
 						int jumping = p.getVelocity().getY() > -0.2D ? 1 : 0;
-						// l.setPitch(0F);
-						// Vector dir = l.getDirection().normalize().multiply(0.5D);
-						// p.setVelocity(dir);
 						final ArrayList<Location> locs = new ArrayList<Location>(Arrays.asList(l.clone().add(0.3, 0, -0.3), l.clone().add(-0.3, 0, -0.3), l.clone().add(0.3, 0, 0.3), l.clone().add(-0.3, 0, +0.3)));
 						ArrayList<Location> temp = new ArrayList<Location>(locs);
 
