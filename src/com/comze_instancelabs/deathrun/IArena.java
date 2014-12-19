@@ -6,10 +6,10 @@ import java.util.Arrays;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitTask;
+import org.bukkit.util.Vector;
 
 import com.comze_instancelabs.minigamesapi.Arena;
 import com.comze_instancelabs.minigamesapi.ArenaType;
@@ -54,13 +54,15 @@ public class IArena extends Arena {
 					Player p = Bukkit.getPlayer(p_);
 					if (p != null) {
 						Location l = p.getLocation().add(0D, -1D, 0D);
+						System.out.println(p.getVelocity().getY());
+						int jumping = p.getVelocity().getY() > -0.2D ? 1 : 0;
 						// l.setPitch(0F);
 						// Vector dir = l.getDirection().normalize().multiply(0.5D);
 						// p.setVelocity(dir);
 						final ArrayList<Location> locs = new ArrayList<Location>(Arrays.asList(l.clone().add(0.3, 0, -0.3), l.clone().add(-0.3, 0, -0.3), l.clone().add(0.3, 0, 0.3), l.clone().add(-0.3, 0, +0.3)));
 						ArrayList<Location> temp = new ArrayList<Location>(locs);
 
-						for (int i = 1; i < m.block_lv_to_remove; i++) {
+						for (int i = 1; i < m.block_lv_to_remove + jumping; i++) {
 							for (Location l_ : temp) {
 								Location n = l_.clone().add(0D, -i, 0D);
 								locs.add(n);
